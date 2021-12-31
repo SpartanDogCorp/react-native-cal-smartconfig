@@ -7,28 +7,37 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.module.annotations.ReactModule;
+import com.facebook.react.bridge.WriteableMap;
+import com.facebook.react.bridge.Arguments;
 
 @ReactModule(name = CalSmartconfigModule.NAME)
 public class CalSmartconfigModule extends ReactContextBaseJavaModule {
-    public static final String NAME = "CalSmartconfig";
+  public static final String NAME = "CalSmartconfig";
 
-    public CalSmartconfigModule(ReactApplicationContext reactContext) {
-        super(reactContext);
-    }
+  public CalSmartconfigModule(ReactApplicationContext reactContext) {
+    super(reactContext);
+  }
 
-    @Override
-    @NonNull
-    public String getName() {
-        return NAME;
-    }
+  @Override
+  @NonNull
+  public String getName() {
+    return NAME;
+  }
 
+  // Example method
+  // See https://reactnative.dev/docs/native-modules-android
+  @ReactMethod
+  public void multiply(int a, int b, Promise promise) {
+    promise.resolve(a * b);
+  }
 
-    // Example method
-    // See https://reactnative.dev/docs/native-modules-android
-    @ReactMethod
-    public void multiply(int a, int b, Promise promise) {
-        promise.resolve(a * b);
-    }
+  public static native int nativeMultiply(int a, int b);
 
-    public static native int nativeMultiply(int a, int b);
+  @ReactMethod
+  public void scanWifi(Promise promise) {
+    WriteableMap map = Arguments.createMap();
+    return map;
+  }
+
+  public static native ReadableMap scanWifi();
 }
