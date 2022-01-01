@@ -1,5 +1,4 @@
 import { NativeModules, Platform } from 'react-native';
-import WifiManager from "react-native-wifi-reborn"
 
 const LINKING_ERROR =
   `The package 'react-native-cal-smartconfig' doesn't seem to be linked. Make sure: \n\n` +
