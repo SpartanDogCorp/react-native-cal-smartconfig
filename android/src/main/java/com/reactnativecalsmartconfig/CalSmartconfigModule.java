@@ -3,6 +3,8 @@ package com.reactnativecalsmartconfig;
 import androidx.annotation.NonNull;
 import android.net.wifi.WifiManager;
 
+import com.espressif.iot.esptouch.EsptouchTask;
+
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -37,10 +39,7 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void provision(String apSsid, String apBssid, String apPassword, Promise promise) {
-    taskResultCount = deviceCountData.length == 0 ? -1 : Integer.parseInt(new String(deviceCountData));
     mEsptouchTask = new EsptouchTask(apSsid, apBssid, apPassword, context);
-    return mEsptouchTask.executeForResults(0);
-    // mEsptouchTask.setPackageBroadcast(broadcastData[0] == 1);
-    // mEsptouchTask.setEsptouchListener(this::publishProgress);
+    promise.resolve(mEsptouchTask.executeForResults(0));
   }
 }
