@@ -1,4 +1,5 @@
 import { NativeModules, Platform } from 'react-native';
+import WifiManager from "react-native-wifi-reborn"
 
 const LINKING_ERROR =
   `The package 'react-native-cal-smartconfig' doesn't seem to be linked. Make sure: \n\n` +
@@ -19,4 +20,8 @@ const CalSmartconfig = NativeModules.CalSmartconfig
 
 export function multiply(a: number, b: number): Promise<number> {
   return CalSmartconfig.multiply(a, b);
+}
+
+export function connect(ssid: string, pass: string): Promise<null> {
+  return CalSmartconfig.provision("KPSSVentures", "e0:db:d1:6a:7b:33", "10panzer");
 }

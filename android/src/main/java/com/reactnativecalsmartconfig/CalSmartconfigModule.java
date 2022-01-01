@@ -1,6 +1,7 @@
 package com.reactnativecalsmartconfig;
 
 import androidx.annotation.NonNull;
+import android.net.wifi.WifiManager;
 
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -14,8 +15,11 @@ import com.facebook.react.bridge.Arguments;
 public class CalSmartconfigModule extends ReactContextBaseJavaModule {
   public static final String NAME = "CalSmartconfig";
 
+  Context context;
+
   public CalSmartconfigModule(ReactApplicationContext reactContext) {
     super(reactContext);
+    context = reactContext;
   }
 
   @Override
@@ -31,13 +35,12 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
     promise.resolve(a * b);
   }
 
-  public static native int nativeMultiply(int a, int b);
-
   @ReactMethod
-  public void scanWifi(Promise promise) {
-    WriteableMap map = Arguments.createMap();
-    return map;
+  public void provision(String apSsid, String apBssid, String apPassword, Promise promise) {
+    taskResultCount = deviceCountData.length == 0 ? -1 : Integer.parseInt(new String(deviceCountData));
+    mEsptouchTask = new EsptouchTask(apSsid, apBssid, apPassword, context);
+    return mEsptouchTask.executeForResults(0);
+    // mEsptouchTask.setPackageBroadcast(broadcastData[0] == 1);
+    // mEsptouchTask.setEsptouchListener(this::publishProgress);
   }
-
-  public static native ReadableMap scanWifi();
 }
