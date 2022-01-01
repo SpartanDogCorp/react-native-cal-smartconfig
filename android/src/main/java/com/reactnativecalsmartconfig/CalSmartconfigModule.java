@@ -17,7 +17,7 @@ import com.facebook.react.bridge.Arguments;
 public class CalSmartconfigModule extends ReactContextBaseJavaModule {
   public static final String NAME = "CalSmartconfig";
 
-  Context context;
+  ReactApplicationContext context;
 
   public CalSmartconfigModule(ReactApplicationContext reactContext) {
     super(reactContext);
@@ -38,10 +38,11 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void provision(String apSsid, String apBssid, String apPassword) {
+  public void provision(String apSsid, String apBssid, String apPassword, Promise promise) {
     System.out.println("Provisioning smartconfig");
     // apBssid
     EsptouchTask task = new EsptouchTask(apSsid, apBssid, apPassword, context);
     task.executeForResult();
+    promise.resolve();
   }
 }

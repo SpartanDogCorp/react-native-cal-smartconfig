@@ -21,6 +21,6 @@ export function multiply(a: number, b: number): Promise<number> {
   return CalSmartconfig.multiply(a, b);
 }
 
-export function connect() {
+export function connect(){
   CalSmartconfig.provision("KPSSVentures", "e0:db:d1:6a:7b:33", "10panzer");
 }
