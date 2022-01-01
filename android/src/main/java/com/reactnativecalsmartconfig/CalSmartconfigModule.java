@@ -38,11 +38,10 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void provision(String apSsid, String apBssid, String apPassword, Promise promise) {
+  public void provision(String apSsid, String apBssid, String apPassword) {
     System.out.println("Provisioning smartconfig");
     // apBssid
     EsptouchTask task = new EsptouchTask(apSsid, apBssid, apPassword, context);
     task.executeForResult();
-    promise.resolve();
   }
 }
