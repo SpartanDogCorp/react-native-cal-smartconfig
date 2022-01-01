@@ -42,6 +42,7 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
     System.out.println("Provisioning smartconfig");
     // apBssid
     EsptouchTask task = new EsptouchTask(apSsid, apBssid, apPassword, context);
-    promise.resolve(task.executeForResult());
+    task.executeForResult();
+    promise.resolve();
   }
 }
