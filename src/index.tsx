@@ -21,6 +21,6 @@ export function multiply(a: number, b: number): Promise<number> {
   return CalSmartconfig.multiply(a, b);
 }
 
-export function connect(): Promise<boolean>{
-  return CalSmartconfig.provision("KPSSVentures", "e0:db:d1:6a:7b:33", "10panzer");
+export function connect(ssid: string, bssid: string, pass: string): Promise<boolean>{
+  return CalSmartconfig.provision(ssid, bssid, pass);
 }
