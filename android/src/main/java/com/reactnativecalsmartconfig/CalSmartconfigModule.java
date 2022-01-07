@@ -1,6 +1,7 @@
 package com.reactnativecalsmartconfig;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 
 import android.net.Network;
 import android.net.NetworkCapabilities;
@@ -9,6 +10,7 @@ import android.net.wifi.WifiInfo;
 import android.net.ConnectivityManager;
 import android.content.Context;
 import android.net.wifi.WifiManager;
+import android.os.Build;
 
 import com.espressif.iot.esptouch.EsptouchTask;
 
@@ -37,15 +39,19 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
     return NAME;
   }
 
+  @RequiresApi(api = Build.VERSION_CODES.Q)
   @ReactMethod
   public void getWifi(Promise promise) {
     ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-    NetworkInfo networkInfo = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+    Network net = connManager.getActiveNetwork();
+    NetworkCapabilities caps = connManager.getNetworkCapabilities(net);
+
     WritableMap results = Arguments.createMap();
-    
-    if (networkInfo.isConnected()) {
-      final WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-      final WifiInfo info = wifiManager.getConnectionInfo();
+
+    if (caps.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+      final WifiInfo info = (WifiInfo) caps.getTransportInfo();
+      System.out.println(info.getBSSID());
+      System.out.println(info.getSSID());
       results.putString("bssid", info.getBSSID());
       results.putString("ssid", info.getSSID());
     }
