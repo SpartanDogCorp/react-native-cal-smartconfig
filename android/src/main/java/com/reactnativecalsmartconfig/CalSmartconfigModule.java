@@ -45,6 +45,7 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
     ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
     WritableMap results = Arguments.createMap();
+    WifiInfo info;
 
     Network[] networks = connManager.getAllNetworks();
     for (int i = 0; i < networks.length; i++) {
@@ -52,14 +53,14 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
       if (!caps.hasTransport(NetworkCapabilities.TRANSPORT_VPN)
           && caps.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
         try {
-          final WifiInfo info = (WifiInfo) caps.getTransportInfo();
+          info = (WifiInfo) caps.getTransportInfo();
+          System.out.println(info.getBSSID());
+          System.out.println(info.getSSID());
+          results.putString("bssid", info.getBSSID());
+          results.putString("ssid", info.getSSID());
         } catch (Exception e) {
           continue;
         }
-        System.out.println(info.getBSSID());
-        System.out.println(info.getSSID());
-        results.putString("bssid", info.getBSSID());
-        results.putString("ssid", info.getSSID());
       }
     }
 
