@@ -54,7 +54,6 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
         System.out.println(info.getSSID());
         results.putString("bssid", info.getBSSID());
         results.putString("ssid", info.getSSID());
-        return results;
       }
     }
 
