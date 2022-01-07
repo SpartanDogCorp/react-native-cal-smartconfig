@@ -41,6 +41,8 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
   public void getWifi(Promise promise) {
     ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
     NetworkInfo networkInfo = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+    WritableMap results = Arguments.createMap();
+    
     if (networkInfo.isConnected()) {
       final WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
       final WifiInfo info = wifiManager.getConnectionInfo();
