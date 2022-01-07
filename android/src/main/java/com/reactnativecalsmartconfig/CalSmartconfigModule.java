@@ -45,7 +45,7 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
 
     WritableMap results = Arguments.createMap();
 
-    Network[] networks = connectivity.getAllNetworks();
+    Network[] networks = connManager.getAllNetworks();
     for (int i = 0; i < networks.length; i++) {
       NetworkCapabilities caps = connManager.getNetworkCapabilities(networks[i]);
       if (caps.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
