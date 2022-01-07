@@ -42,17 +42,20 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
   @ReactMethod
   public void getWifi(Promise promise) {
     ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-    Network net = connManager.getActiveNetwork();
-    NetworkCapabilities caps = connManager.getNetworkCapabilities(net);
 
     WritableMap results = Arguments.createMap();
 
-    if (caps.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
-      final WifiInfo info = (WifiInfo) caps.getTransportInfo();
-      System.out.println(info.getBSSID());
-      System.out.println(info.getSSID());
-      results.putString("bssid", info.getBSSID());
-      results.putString("ssid", info.getSSID());
+    Network[] networks = connectivity.getAllNetworks();
+    for (int i = 0; i < networks.length; i++) {
+      NetworkCapabilities caps = connManager.getNetworkCapabilities(net);
+      if (caps.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+        final WifiInfo info = (WifiInfo) caps.getTransportInfo();
+        System.out.println(info.getBSSID());
+        System.out.println(info.getSSID());
+        results.putString("bssid", info.getBSSID());
+        results.putString("ssid", info.getSSID());
+        return results;
+      }
     }
 
     promise.resolve(results);
