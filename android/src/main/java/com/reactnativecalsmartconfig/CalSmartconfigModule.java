@@ -8,6 +8,7 @@ import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.ConnectivityManager;
+import android.net.VpnTransportInfo;
 import android.content.Context;
 import android.net.wifi.WifiManager;
 import android.os.Build;
@@ -48,7 +49,8 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
     Network[] networks = connManager.getAllNetworks();
     for (int i = 0; i < networks.length; i++) {
       NetworkCapabilities caps = connManager.getNetworkCapabilities(networks[i]);
-      if (caps.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+      if (!caps.hasTransport(NetworkCapabilities.TRANSPORT_VPN)
+          && caps.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
         final WifiInfo info = (WifiInfo) caps.getTransportInfo();
         System.out.println(info.getBSSID());
         System.out.println(info.getSSID());
