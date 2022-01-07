@@ -39,7 +39,6 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
     return NAME;
   }
 
-  @RequiresApi(api = Build.VERSION_CODES.Q)
   @ReactMethod
   public void getWifi(Promise promise) {
     ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);

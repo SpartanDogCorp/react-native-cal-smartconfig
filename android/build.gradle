@@ -18,7 +18,7 @@ def safeExtGet(prop, fallback) {
     rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
 }
 
-android {r
+android {
     compileSdkVersion safeExtGet('CalSmartconfig_compileSdkVersion', 29)
     defaultConfig {
         minSdkVersion safeExtGet('CalSmartconfig_minSdkVersion', 29)
