@@ -1,8 +1,14 @@
 package com.reactnativecalsmartconfig;
 
 import androidx.annotation.NonNull;
-import android.net.wifi.WifiManager;
+
+import android.net.Network;
+import android.net.NetworkCapabilities;
+import android.net.NetworkInfo;
+import android.net.wifi.WifiInfo;
+import android.net.ConnectivityManager;
 import android.content.Context;
+import android.net.wifi.WifiManager;
 
 import com.espressif.iot.esptouch.EsptouchTask;
 
@@ -11,13 +17,14 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.module.annotations.ReactModule;
+import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.Arguments;
 
 @ReactModule(name = CalSmartconfigModule.NAME)
 public class CalSmartconfigModule extends ReactContextBaseJavaModule {
   public static final String NAME = "CalSmartconfig";
 
-  ReactApplicationContext context;
+  Context context;
 
   public CalSmartconfigModule(ReactApplicationContext reactContext) {
     super(reactContext);
@@ -30,11 +37,18 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
     return NAME;
   }
 
-  // Example method
-  // See https://reactnative.dev/docs/native-modules-android
   @ReactMethod
-  public void multiply(int a, int b, Promise promise) {
-    promise.resolve(a * b);
+  public void getWifi(Promise promise) {
+    ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+    NetworkInfo networkInfo = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+    if (networkInfo.isConnected()) {
+      final WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+      final WifiInfo info = wifiManager.getConnectionInfo();
+      results.putString("bssid", info.getBSSID());
+      results.putString("ssid", info.getSSID());
+    }
+
+    promise.resolve(results);
   }
 
   @ReactMethod
