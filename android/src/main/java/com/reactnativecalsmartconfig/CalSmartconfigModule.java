@@ -51,7 +51,11 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
       NetworkCapabilities caps = connManager.getNetworkCapabilities(networks[i]);
       if (!caps.hasTransport(NetworkCapabilities.TRANSPORT_VPN)
           && caps.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
-        final WifiInfo info = (WifiInfo) caps.getTransportInfo();
+        try {
+          final WifiInfo info = (WifiInfo) caps.getTransportInfo();
+        } catch (Exception e) {
+          continue;
+        }
         System.out.println(info.getBSSID());
         System.out.println(info.getSSID());
         results.putString("bssid", info.getBSSID());
