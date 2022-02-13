@@ -15,6 +15,7 @@ import android.os.Build;
 import com.espressif.iot.esptouch.EsptouchTask;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import com.espreccif.iot.esptouch.IEsptouchListener;
 
@@ -72,13 +73,14 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void provision(String apSsid, String apBssid, String apPassword, Integer count, Promise promise) {
-    System.out.println("Provisioning smartconfig");
+    Logger log = Logger.getGlobal();
+    log.info("Provisioning SmartConfig");
 
     ArrayList<E> results = new ArrayList<IEsptouchResult>();
     private class TouchListener implements IEsptouchListener {
       void onEsptouchResultAdded(IEsptouchResult result) {
         results.add(result);
-        System.out.println(result);
+        log.info(result);
 
         if (count = 0) {
           promise.resolve(results);
