@@ -79,7 +79,7 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
       void onEsptouchResultAdded(IEsptouchResult result) {
         results.add(result);
 
-        if (count >= 0) {
+        if (count > 0) {
           promise.resolve(results);
         }
 
@@ -90,6 +90,7 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
     }
 
     EsptouchTask task = new EsptouchTask(apSsid, apBssid, apPassword, context);
+    task.setEsptouchListener(TouchListener);
     if (count == 0) {
       task.executeForResult();
     } else {
