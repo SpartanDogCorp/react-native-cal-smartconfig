@@ -14,6 +14,10 @@ import android.os.Build;
 
 import com.espressif.iot.esptouch.EsptouchTask;
 
+import java.util.ArrayList;
+
+import com.espreccif.iot.esptouch.IEsptouchListener;
+
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -67,11 +71,29 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void provision(String apSsid, String apBssid, String apPassword, Promise promise) {
+  public void provision(String apSsid, String apBssid, String apPassword, Integer count, Promise promise) {
     System.out.println("Provisioning smartconfig");
-    // apBssid
+
+    ArrayList<E> results = new ArrayList<IEsptouchResult>();
+    private class TouchListener implements IEsptouchListener {
+      void onEsptouchResultAdded(IEsptouchResult result) {
+        results.add(result);
+
+        if (count >= 0) {
+          promise.resolve(results);
+        }
+
+        if (results.size() == count) {
+          promise.resolve(results);
+        }
+      }
+    }
+
     EsptouchTask task = new EsptouchTask(apSsid, apBssid, apPassword, context);
-    task.executeForResult();
-    promise.resolve(true);
+    if (count == 0) {
+      task.executeForResult();
+    } else {
+      task.executeForResults(count);
+    }
   }
 }
