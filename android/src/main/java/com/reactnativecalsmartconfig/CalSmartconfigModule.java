@@ -78,6 +78,7 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
     private class TouchListener implements IEsptouchListener {
       void onEsptouchResultAdded(IEsptouchResult result) {
         results.add(result);
+        System.out.println(result);
 
         if (count = 0) {
           promise.resolve(results);
