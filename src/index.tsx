@@ -21,6 +21,6 @@ export function getWifi(): Promise<any>{
   return CalSmartconfig.getWifi();
 }
 
-export function connect(ssid: string, bssid: string, pass: string, count: number): Promise<boolean>{
+export async function connect(ssid: string, bssid: string, pass: string, count: number): Promise<boolean>{
   return CalSmartconfig.provision(ssid, bssid, pass, count);
 }
