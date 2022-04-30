@@ -1,8 +1,8 @@
 @objc(CalSmartconfig)
 class CalSmartconfig: NSObject {
 
-    @objc(multiply:withB:withResolver:withRejecter:)
-    func multiply(a: Float, b: Float, resolve:RCTPromiseResolveBlock,reject:RCTPromiseRejectBlock) -> Void {
-        resolve(a*b)
+    @objc(provision:location:withResolver:withRejecter:)
+    func provision(ssid: String, bssid: String, password: String, resolve:RCTPromiseResolveBlock,reject:RCTPromiseRejectBlock ) -> Void{
+
     }
 }
