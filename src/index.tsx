@@ -17,6 +17,14 @@ const CalSmartconfig = NativeModules.CalSmartconfig
       }
     );
 
-export function multiply(a: number, b: number): Promise<number> {
-  return CalSmartconfig.multiply(a, b);
+export function getWifi(): Promise<any>{
+  return CalSmartconfig.getWifi();
+}
+
+export async function connect(ssid: string, bssid: string, pass: string, count: number): Promise<boolean>{
+  count = count == 0?1:count
+  CalSmartconfig.provision(ssid, bssid, pass, count)
+  .then((data)=>{
+    return data
+  })
 }
