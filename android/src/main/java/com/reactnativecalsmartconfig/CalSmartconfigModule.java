@@ -72,6 +72,14 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
+  public void start(final ReadableMap options, final Promise promise) {
+    String ssid = options.getString("ssid");
+    String bssid = options.getString("bssid");
+    String pass = options.getString("password");
+    return provision(ssid, bssid, pass, 2, promise);
+  }
+
+  @ReactMethod
   public void provision(String apSsid, String apBssid, String apPassword, Integer count, Promise promise) {
     Logger log = Logger.getGlobal();
     log.info("Provisioning SmartConfig");
