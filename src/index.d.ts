@@ -1,4 +1,4 @@
-declare module 'react-native-smartconfig-esp' {
+declare module 'react-native-cal-smartconfig' {
     function start(config: {
         type: 'esptouch' | 'airkiss',
         ssid: string,
