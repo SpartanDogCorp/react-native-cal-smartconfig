@@ -17,7 +17,7 @@ import com.espressif.iot.esptouch.EsptouchTask;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
-import com.espreccif.iot.esptouch.IEsptouchListener;
+import com.espressif.iot.esptouch.IEsptouchListener;
 
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
