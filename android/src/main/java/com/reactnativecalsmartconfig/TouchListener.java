@@ -1,6 +1,7 @@
 package com.reactnativecalsmartconfig;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import com.espressif.iot.esptouch.EsptouchTask;
 import com.espressif.iot.esptouch.IEsptouchResult;
@@ -22,6 +23,7 @@ public class TouchListener implements IEsptouchListener {
   }
 
   public void onEsptouchResultAdded(IEsptouchResult result) {
+    Logger log = Logger.getGlobal();
     results.add(result);
     log.info(result);
 
