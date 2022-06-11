@@ -77,12 +77,12 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
     String ssid = options.getString("ssid");
     String bssid = options.getString("bssid");
     String pass = options.getString("password");
-    Integer count = options.getInt("count");
+    int count = options.getInt("count");
     provision(ssid, bssid, pass, count, promise);
   }
 
   @ReactMethod
-  public void provision(String apSsid, String apBssid, String apPassword, Integer count, Promise promise) {
+  public void provision(String apSsid, String apBssid, String apPassword, int count, Promise promise) {
     Logger log = Logger.getGlobal();
     log.info("Provisioning SmartConfig");
 

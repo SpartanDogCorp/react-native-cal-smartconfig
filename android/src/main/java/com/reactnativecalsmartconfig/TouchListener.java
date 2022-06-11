@@ -16,7 +16,7 @@ public class TouchListener implements IEsptouchListener {
   ArrayList<IEsptouchResult> results;
   Integer count;
 
-  TouchListener(Integer count, Promise promise) {
+  TouchListener(int count, Promise promise) {
     this.promise = promise;
     this.count = count;
     this.results = new ArrayList<IEsptouchResult>(); // Arguments.createMap();
