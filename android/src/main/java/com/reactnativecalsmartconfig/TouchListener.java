@@ -13,7 +13,7 @@ public class TouchListener implements IEsptouchListener {
     this.promise = promise;
   }
 
-  void onEsptouchResultAdded(IEsptouchResult result) {
+  public void onEsptouchResultAdded(IEsptouchResult result) {
     results.add(result);
     log.info(result);
 
