@@ -33,8 +33,8 @@ public class TouchListener implements IEsptouchListener {
       WritableMap resultMap;
       for (int i = 0; i < results.size(); i++) {
         resultMap = Arguments.createMap();
-        resultMap.putBool("success", result.isSuc());
-        resultMap.putBool("cancelled", result.isCancelled());
+        resultMap.putBoolean("success", result.isSuc());
+        resultMap.putBoolean("cancelled", result.isCancelled());
         resultMap.putString("bssid", result.getBssid());
         resultMap.putString("address", result.getInetAddress().toString());
         resultsArray.pushMap(resultMap);
