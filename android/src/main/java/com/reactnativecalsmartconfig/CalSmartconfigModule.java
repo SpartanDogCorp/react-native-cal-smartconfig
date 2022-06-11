@@ -77,7 +77,8 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
     String ssid = options.getString("ssid");
     String bssid = options.getString("bssid");
     String pass = options.getString("password");
-    provision(ssid, bssid, pass, 2, promise);
+    Integer count = option.getInt("count");
+    provision(ssid, bssid, pass, count, promise);
   }
 
   @ReactMethod
