@@ -1,6 +1,6 @@
 package com.reactnativecalsmartconfig;
 
-private class TouchListener implements IEsptouchListener {
+public class TouchListener implements IEsptouchListener {
   void onEsptouchResultAdded(IEsptouchResult result) {
     results.add(result);
     log.info(result);
