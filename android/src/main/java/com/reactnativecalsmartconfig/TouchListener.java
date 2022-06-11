@@ -1,5 +1,7 @@
 package com.reactnativecalsmartconfig;
 
+import com.espressif.iot.esptouch.IEsptouchListener;
+
 public class TouchListener implements IEsptouchListener {
   void onEsptouchResultAdded(IEsptouchResult result) {
     results.add(result);
