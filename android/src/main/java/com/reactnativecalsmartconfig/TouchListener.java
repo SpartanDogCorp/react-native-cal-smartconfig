@@ -25,7 +25,7 @@ public class TouchListener implements IEsptouchListener {
   public void onEsptouchResultAdded(IEsptouchResult result) {
     Logger log = Logger.getGlobal();
     results.add(result);
-    log.info(result);
+    log.info(result.getInetAddress());
 
     if (this.count = 0) {
       this.promise.resolve(results);
