@@ -80,9 +80,9 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
 
     int count = 2;
 
-    if (options.hasKey("count")) {
-      count = options.getInt("count");
-    }
+    // if (options.hasKey("count")) {
+    // count = options.getInt("count");
+    // }
     provision(ssid, bssid, pass, count, promise);
   }
 
@@ -93,6 +93,12 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
 
     EsptouchTask task = new EsptouchTask(apSsid, apBssid, apPassword, context);
     task.setEsptouchListener(new TouchListener(count, promise));
-    task.executeForResults(count);
+
+    try {
+      task.executeForResults(count);
+    } catch (RuntimeException e) {
+      log.severe(e.getMessage());
+    }
+
   }
 }
