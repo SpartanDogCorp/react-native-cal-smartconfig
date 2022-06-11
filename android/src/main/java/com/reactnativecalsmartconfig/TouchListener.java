@@ -29,8 +29,8 @@ public class TouchListener implements IEsptouchListener {
     log.info(result.getInetAddress().toString());
 
     if (results.size() >= this.count) {
-      WriteableArray resultsArray = Arguments.createArray();
-      WriteableMap resultMap;
+      Arguments.WriteableArray resultsArray = Arguments.createArray();
+      Arguments.WriteableMap resultMap;
       for (int i = 0; i < results.size(); i++) {
         resultMap = Arguments.createMap();
         resultMap.putBool("success", result.isSuc());
