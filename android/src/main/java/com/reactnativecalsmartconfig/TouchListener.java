@@ -27,12 +27,19 @@ public class TouchListener implements IEsptouchListener {
     results.add(result);
     log.info(result.getInetAddress().toString());
 
-    if (this.count == 0) {
-      this.promise.resolve(results.toArray());// no plus sign here
-    }
-
     if (results.size() >= this.count) {
-      this.promise.resolve(results.toArray());
+      Arguments.WriteableArray resultsArray = new Arguments.WriteableArray();
+      Arguments.WriteableMap resultMap;
+      for (int i = 0; i < results.size(); i++) {
+        resultMap = new Arguments.WriteableMap();
+        resultMap.putBool("success", result.isSuc());
+        resultMap.putBool("cancelled", result.isCancelled());
+        resultMap.putString("bssid", result.getBssid());
+        resultMap.putString("address", result.getInetAddress.toString());
+        resultsArray.pushMap(resultMap);
+      }
+
+      this.promise.resolve(resultsArray);
     }
   }
 }
