@@ -85,10 +85,8 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
     Logger log = Logger.getGlobal();
     log.info("Provisioning SmartConfig");
 
-    ArrayList<T> results = new ArrayList<IEsptouchResult>();
-
     EsptouchTask task = new EsptouchTask(apSsid, apBssid, apPassword, context);
-    task.setEsptouchListener(new TouchListener(promise));
+    task.setEsptouchListener(new TouchListener(count, promise));
     task.executeForResults(count);
   }
 }

@@ -6,25 +6,28 @@ import com.espressif.iot.esptouch.IEsptouchListener;
 
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.bridge.Arguments;
 
 public class TouchListener implements IEsptouchListener {
   Promise promise;
-  WritableMap results;
+  ArrayList<IEsptouchResult> results;
+  Integer count;
 
-  TouchListener(Promise promise) {
+  TouchListener(Integer count, Promise promise) {
     this.promise = promise;
-    this.results = Arguments.createMap();
+    this.count = count;
+    this.results = new ArrayList<IEsptouchResult>(); // Arguments.createMap();
   }
 
   public void onEsptouchResultAdded(IEsptouchResult result) {
     results.add(result);
     log.info(result);
 
-    if (count = 0) {
+    if (this.count = 0) {
       this.promise.resolve(results);
     }
 
-    if (results.size() == count) {
+    if (results.size() >= this.count) {
       this.promise.resolve(results);
     }
   }
