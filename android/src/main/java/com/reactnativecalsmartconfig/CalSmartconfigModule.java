@@ -88,7 +88,7 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
     ArrayList<T> results = new ArrayList<IEsptouchResult>();
 
     EsptouchTask task = new EsptouchTask(apSsid, apBssid, apPassword, context);
-    task.setEsptouchListener(new TouchListener());
+    task.setEsptouchListener(new TouchListener(promise));
     task.executeForResults(count);
   }
 }
