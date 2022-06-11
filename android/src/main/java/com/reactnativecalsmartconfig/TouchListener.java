@@ -9,6 +9,7 @@ import com.espressif.iot.esptouch.IEsptouchListener;
 
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.Arguments;
 
 public class TouchListener implements IEsptouchListener {
@@ -28,10 +29,10 @@ public class TouchListener implements IEsptouchListener {
     log.info(result.getInetAddress().toString());
 
     if (results.size() >= this.count) {
-      Arguments.WriteableArray resultsArray = new Arguments.WriteableArray();
-      Arguments.WriteableMap resultMap;
+      WriteableArray resultsArray = Arguments.createArray();
+      WriteableMap resultMap;
       for (int i = 0; i < results.size(); i++) {
-        resultMap = new Arguments.WriteableMap();
+        resultMap = Arguments.createMap();
         resultMap.putBool("success", result.isSuc());
         resultMap.putBool("cancelled", result.isCancelled());
         resultMap.putString("bssid", result.getBssid());
