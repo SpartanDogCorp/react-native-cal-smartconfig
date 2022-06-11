@@ -13,11 +13,11 @@ import android.net.wifi.WifiManager;
 import android.os.Build;
 
 import com.espressif.iot.esptouch.EsptouchTask;
+import com.espressif.iot.esptouch.IEsptouchResult;
+import com.espressif.iot.esptouch.IEsptouchListener;
 
 import java.util.ArrayList;
 import java.util.logging.Logger;
-
-import com.espressif.iot.esptouch.IEsptouchListener;
 
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
