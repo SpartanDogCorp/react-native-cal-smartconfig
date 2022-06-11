@@ -18,11 +18,11 @@ public class TouchListener implements IEsptouchListener {
     log.info(result);
 
     if (count = 0) {
-      promise.resolve(results);
+      this.promise.resolve(results);
     }
 
     if (results.size() == count) {
-      promise.resolve(results);
+      this.promise.resolve(results);
     }
   }
 }
