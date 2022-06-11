@@ -28,11 +28,11 @@ public class TouchListener implements IEsptouchListener {
     log.info(result.getInetAddress().toString());
 
     if (this.count == 0) {
-      this.promise.resolve(results);// no plus sign here
+      this.promise.resolve(results.toArray());// no plus sign here
     }
 
     if (results.size() >= this.count) {
-      this.promise.resolve(results);
+      this.promise.resolve(results.toArray());
     }
   }
 }
