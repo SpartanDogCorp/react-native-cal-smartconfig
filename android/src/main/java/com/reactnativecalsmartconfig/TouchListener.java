@@ -36,7 +36,7 @@ public class TouchListener implements IEsptouchListener {
         resultMap.putBool("success", result.isSuc());
         resultMap.putBool("cancelled", result.isCancelled());
         resultMap.putString("bssid", result.getBssid());
-        resultMap.putString("address", result.getInetAddress.toString());
+        resultMap.putString("address", result.getInetAddress().toString());
         resultsArray.pushMap(resultMap);
       }
 
