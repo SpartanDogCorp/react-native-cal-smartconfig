@@ -20,7 +20,7 @@ public class TouchListener implements IEsptouchListener {
   TouchListener(int count, Promise promise) {
     this.promise = promise;
     this.count = count;
-    this.results = new ArrayList<IEsptouchResult>(); // Arguments.createMap();
+    this.results = new ArrayList<IEsptouchResult>();
   }
 
   public void onEsptouchResultAdded(IEsptouchResult result) {
@@ -29,8 +29,8 @@ public class TouchListener implements IEsptouchListener {
     log.info(result.getInetAddress().toString());
 
     if (results.size() >= this.count) {
-      Arguments.WriteableArray resultsArray = Arguments.createArray();
-      Arguments.WriteableMap resultMap;
+      WritableArray resultsArray = Arguments.createArray();
+      WritableMap resultMap;
       for (int i = 0; i < results.size(); i++) {
         resultMap = Arguments.createMap();
         resultMap.putBool("success", result.isSuc());
