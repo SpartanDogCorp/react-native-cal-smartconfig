@@ -5,12 +5,15 @@ import com.espressif.iot.esptouch.IEsptouchResult;
 import com.espressif.iot.esptouch.IEsptouchListener;
 
 import com.facebook.react.bridge.Promise;
+import com.facebook.react.bridge.WritableMap;
 
 public class TouchListener implements IEsptouchListener {
   Promise promise;
+  WritableMap results;
 
   TouchListener(Promise promise) {
     this.promise = promise;
+    this.results = Arguments.createMap();
   }
 
   public void onEsptouchResultAdded(IEsptouchResult result) {
