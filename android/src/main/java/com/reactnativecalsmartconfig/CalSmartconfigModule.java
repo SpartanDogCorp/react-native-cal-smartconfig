@@ -101,6 +101,18 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
 
     WorkManager.getWorkInfoById(work.getId());
 
+    Futures.addCallback(future, new FutureCallback<Void>() {
+      @Override
+      public void onSuccess(Void result) {
+        promise.resolve(null);
+      }
+
+      @Override
+      public void onFailure(Throwable t) {
+        promise.reject(t);
+      }
+    });
+
     // if (options.hasKey("count")) {
     // count = options.getInt("count");
     // }
