@@ -28,6 +28,11 @@ import com.facebook.react.module.annotations.ReactModule;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.Arguments;
 
+import androidx.work.Data;
+import androidx.work.WorkManager;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.OutOfQuotaPolicy;
+
 @ReactModule(name = CalSmartconfigModule.NAME)
 public class CalSmartconfigModule extends ReactContextBaseJavaModule {
   public static final String NAME = "CalSmartconfig";
@@ -78,7 +83,23 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
     String bssid = options.getString("bssid");
     String pass = options.getString("password");
 
-    int count = 2;
+    int count = 0;
+
+    Data.Builder data = new Data.Builder();
+    data.putString("ssid", ssid);
+    data.putString("bssid", bssid);
+    data.putString("password", pass);
+
+    OneTimeWorkRequest work = new OneTimeWorkRequest.Builder(SmartConfigWorker.class)
+        .setInputData(data.build())
+        .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
+        .build();
+
+    ListenableFuture<Void> future = WorkManager
+        .getInstance(context)
+        .enqueue(work);
+
+    WorkManager.getWorkInfoById(work.getId());
 
     // if (options.hasKey("count")) {
     // count = options.getInt("count");
