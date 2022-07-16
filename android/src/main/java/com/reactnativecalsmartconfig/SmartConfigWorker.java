@@ -23,7 +23,7 @@ public class SmartConfigWorker extends Worker {
     task.setEsptouchListener(new TouchListener(count, promise));
 
     try {
-      task.executeForResults(count);
+      task.executeForResults(0);
     } catch (RuntimeException e) {
       log.severe(e.getMessage());
     }
