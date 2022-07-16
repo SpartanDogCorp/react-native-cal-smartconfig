@@ -99,39 +99,16 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
         .getInstance(context)
         .enqueue(work);
 
-    WorkManager.getWorkInfoById(work.getId());
-
-    Futures.addCallback(future, new FutureCallback<Void>() {
+    WorkInfo info = WorkManager.getInstance(context)getWorkInfoByIdLiveData(work.getId());
+    info.observe(context.getCurrentActivity(), new Observer<WorkInfo>() {
       @Override
-      public void onSuccess(Void result) {
-        promise.resolve(null);
-      }
-
-      @Override
-      public void onFailure(Throwable t) {
-        promise.reject(t);
+      public void onChanged(WorkInfo workInfo) {
+        if (workInfo.getState() == WorkInfo.State.SUCCEEDED) {
+          Data data = workInfo.getOutputData();
+          String count = data.getString("count");
+          promise.resolve(count);
+        }
       }
     });
-
-    // if (options.hasKey("count")) {
-    // count = options.getInt("count");
-    // }
-    provision(ssid, bssid, pass, count, promise);
-  }
-
-  @ReactMethod
-  public void provision(String apSsid, String apBssid, String apPassword, int count, Promise promise) {
-    Logger log = Logger.getGlobal();
-    log.info("Provisioning SmartConfig");
-
-    EsptouchTask task = new EsptouchTask(apSsid, apBssid, apPassword, context);
-    task.setEsptouchListener(new TouchListener(count, promise));
-
-    try {
-      task.executeForResults(count);
-    } catch (RuntimeException e) {
-      log.severe(e.getMessage());
-    }
-
   }
 }

@@ -22,12 +22,17 @@ public class SmartConfigWorker extends Worker {
     EsptouchTask task = new EsptouchTask(ssid, bssid, pass, this.context);
     task.setEsptouchListener(new TouchListener(count, promise));
 
+    List<IEsptouchResult> results;
+
     try {
-      task.executeForResults(0);
+      results = task.executeForResults(0);
     } catch (RuntimeException e) {
       log.severe(e.getMessage());
+      return Result.FAILURE;
     }
 
-    return Result.success();
+    Data out = new Data.Builder().putString("count", results.size()).build();
+
+    return Result.success(out);
   }
 }

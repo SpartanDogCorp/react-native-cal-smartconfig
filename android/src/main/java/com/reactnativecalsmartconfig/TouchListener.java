@@ -23,6 +23,8 @@ public class TouchListener implements IEsptouchListener {
     this.results = new ArrayList<IEsptouchResult>();
   }
 
+  // Apply a timeout, and reduce it as more results are found.
+
   public void onEsptouchResultAdded(IEsptouchResult result) {
     Logger log = Logger.getGlobal();
     results.add(result);
