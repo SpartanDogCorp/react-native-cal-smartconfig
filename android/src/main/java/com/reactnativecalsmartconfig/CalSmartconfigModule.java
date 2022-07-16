@@ -56,8 +56,6 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
     String bssid = options.getString("bssid");
     String pass = options.getString("password");
 
-    int count = 0;
-
     Data.Builder data = new Data.Builder();
     data.putString("ssid", ssid);
     data.putString("bssid", bssid);
@@ -78,7 +76,7 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
       public void onChanged(WorkInfo workInfo) {
         if (workInfo.getState() == WorkInfo.State.SUCCEEDED) {
           Data data = workInfo.getOutputData();
-          String count = data.getString("count");
+          Int count = data.getInt("count");
           promise.resolve(count);
         }
       }

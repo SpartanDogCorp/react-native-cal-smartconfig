@@ -31,7 +31,7 @@ public class SmartConfigWorker extends Worker {
       return Result.FAILURE;
     }
 
-    Data out = new Data.Builder().putString("count", results.size()).build();
+    Data out = new Data.Builder().putInt("count", results.size()).build();
 
     return Result.success(out);
   }
