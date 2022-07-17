@@ -70,7 +70,7 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
         .getInstance(context)
         .enqueue(work);
 
-    WorkInfo info = WorkManager.getInstance(context)getWorkInfoByIdLiveData(work.getId());
+    WorkInfo info = WorkManager.getInstance(context).getWorkInfoByIdLiveData(work.getId());
     info.observe(context.getCurrentActivity(), new Observer<WorkInfo>() {
       @Override
       public void onChanged(WorkInfo workInfo) {
