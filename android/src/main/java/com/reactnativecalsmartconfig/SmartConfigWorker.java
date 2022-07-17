@@ -16,6 +16,7 @@ import com.espressif.iot.esptouch.EsptouchTask;
 import com.espressif.iot.esptouch.IEsptouchResult;
 import com.espressif.iot.esptouch.IEsptouchListener;
 
+import java.util.List;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
@@ -52,7 +53,7 @@ public class SmartConfigWorker extends Worker {
     log.info("Provisioning SmartConfig");
 
     EsptouchTask task = new EsptouchTask(ssid, bssid, pass, this.context);
-    task.setEsptouchListener(new TouchListener(count, promise));
+    // task.setEsptouchListener(new TouchListener(count, promise));
 
     List<IEsptouchResult> results;
 
