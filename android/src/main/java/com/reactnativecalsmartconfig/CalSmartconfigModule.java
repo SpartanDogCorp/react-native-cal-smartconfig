@@ -35,6 +35,8 @@ import androidx.work.OneTimeWorkRequest;
 import androidx.work.OutOfQuotaPolicy;
 import androidx.work.WorkInfo;
 
+import androidx.lifecycle.LiveData;
+
 @ReactModule(name = CalSmartconfigModule.NAME)
 public class CalSmartconfigModule extends ReactContextBaseJavaModule {
   public static final String NAME = "CalSmartconfig";
@@ -72,7 +74,7 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
         .getInstance(context)
         .enqueue(work);
 
-    WorkInfo info = WorkManager.getInstance(context).getWorkInfoByIdLiveData(work.getId());
+    LiveInfo<WorkInfo> info = WorkManager.getInstance(context).getWorkInfoByIdLiveData(work.getId());
     info.observe(context.getCurrentActivity(), new Observer<WorkInfo>() {
       @Override
       public void onChanged(WorkInfo workInfo) {
