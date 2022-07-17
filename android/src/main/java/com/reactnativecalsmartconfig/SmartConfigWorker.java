@@ -32,6 +32,7 @@ import com.facebook.react.bridge.Arguments;
 
 import androidx.work.Data;
 import androidx.work.WorkManager;
+import androidx.work.Worker;
 import androidx.work.WorkInfo;
 import androidx.work.WorkerParameters;
 import androidx.work.OneTimeWorkRequest;
