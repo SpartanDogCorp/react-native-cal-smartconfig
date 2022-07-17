@@ -18,6 +18,7 @@ import com.espressif.iot.esptouch.IEsptouchListener;
 
 import java.util.ArrayList;
 import java.util.logging.Logger;
+import java.util.Observer;
 
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -32,6 +33,7 @@ import androidx.work.Data;
 import androidx.work.WorkManager;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.OutOfQuotaPolicy;
+import androidx.work.WorkInfo;
 
 @ReactModule(name = CalSmartconfigModule.NAME)
 public class CalSmartconfigModule extends ReactContextBaseJavaModule {
@@ -76,7 +78,7 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
       public void onChanged(WorkInfo workInfo) {
         if (workInfo.getState() == WorkInfo.State.SUCCEEDED) {
           Data data = workInfo.getOutputData();
-          Int count = data.getInt("count");
+          int count = data.getInt("count");
           promise.resolve(count);
         }
       }

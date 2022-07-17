@@ -39,7 +39,7 @@ import androidx.work.OutOfQuotaPolicy;
 import androidx.work.ListenableWorker.Result;
 import androidx.work.ListenableWorker;
 
-public class SmartConfigWorker extends ListenableWorker {
+public class SmartConfigWorker extends Worker {
   public SmartConfigWorker(
       @NonNull Context context,
       @NonNull WorkerParameters params) {
