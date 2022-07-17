@@ -32,7 +32,7 @@ import androidx.work.Data;
 import androidx.work.WorkManager;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.OutOfQuotaPolicy;
-import androidx.work.Result;
+import androidx.work.ListenableWorker.Result;
 
 public class SmartConfigWorker extends Worker {
   public SmartConfigWorker(
