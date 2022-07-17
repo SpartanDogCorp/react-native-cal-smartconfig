@@ -1,7 +1,37 @@
 package com.reactnativecalsmartconfig;
 
-import androidx.work.Worker;
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+
+import android.net.Network;
+import android.net.NetworkCapabilities;
+import android.net.NetworkInfo;
+import android.net.wifi.WifiInfo;
+import android.net.ConnectivityManager;
+import android.content.Context;
+import android.net.wifi.WifiManager;
+import android.os.Build;
+
+import com.espressif.iot.esptouch.EsptouchTask;
+import com.espressif.iot.esptouch.IEsptouchResult;
+import com.espressif.iot.esptouch.IEsptouchListener;
+
+import java.util.ArrayList;
+import java.util.logging.Logger;
+
+import com.facebook.react.bridge.Promise;
+import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.ReactContextBaseJavaModule;
+import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.module.annotations.ReactModule;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.bridge.Arguments;
+
 import androidx.work.Data;
+import androidx.work.WorkManager;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.OutOfQuotaPolicy;
 
 public class SmartConfigWorker extends Worker {
   public SmartConfigWorker(
