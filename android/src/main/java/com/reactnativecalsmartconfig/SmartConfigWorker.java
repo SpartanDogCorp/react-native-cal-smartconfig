@@ -19,6 +19,7 @@ import com.espressif.iot.esptouch.IEsptouchListener;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.logging.Logger;
+import java.util.Observer;
 
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -31,11 +32,14 @@ import com.facebook.react.bridge.Arguments;
 
 import androidx.work.Data;
 import androidx.work.WorkManager;
+import androidx.work.WorkInfo;
+import androidx.work.WorkerParameters;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.OutOfQuotaPolicy;
 import androidx.work.ListenableWorker.Result;
+import androidx.work.ListenableWorker;
 
-public class SmartConfigWorker extends Worker {
+public class SmartConfigWorker extends ListenableWorker {
   public SmartConfigWorker(
       @NonNull Context context,
       @NonNull WorkerParameters params) {
