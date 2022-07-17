@@ -60,7 +60,7 @@ public class SmartConfigWorker extends Worker {
       results = task.executeForResults(0);
     } catch (RuntimeException e) {
       log.severe(e.getMessage());
-      return Result.FAILURE;
+      return Result.failure();
     }
 
     Data out = new Data.Builder().putInt("count", results.size()).build();
