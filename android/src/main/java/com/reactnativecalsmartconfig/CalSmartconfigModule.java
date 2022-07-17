@@ -66,7 +66,7 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
         .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
         .build();
 
-    ListenableFuture<Void> future = WorkManager
+    WorkManager
         .getInstance(context)
         .enqueue(work);
 
