@@ -1,6 +1,7 @@
 package com.reactnativecalsmartconfig;
 
 import androidx.work.Worker;
+import androidx.work.Data;
 
 public class SmartConfigWorker extends Worker {
   public SmartConfigWorker(
