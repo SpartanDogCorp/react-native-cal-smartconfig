@@ -2,6 +2,7 @@ package com.reactnativecalsmartconfig;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.net.Network;
 import android.net.NetworkCapabilities;
@@ -11,6 +12,8 @@ import android.net.ConnectivityManager;
 import android.content.Context;
 import android.net.wifi.WifiManager;
 import android.os.Build;
+import android.app.Activity;
+import android.content.ContextWrapper;
 
 import com.espressif.iot.esptouch.EsptouchTask;
 import com.espressif.iot.esptouch.IEsptouchResult;
@@ -18,7 +21,6 @@ import com.espressif.iot.esptouch.IEsptouchListener;
 
 import java.util.ArrayList;
 import java.util.logging.Logger;
-import java.util.Observer;
 
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -36,12 +38,13 @@ import androidx.work.OutOfQuotaPolicy;
 import androidx.work.WorkInfo;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 
 @ReactModule(name = CalSmartconfigModule.NAME)
 public class CalSmartconfigModule extends ReactContextBaseJavaModule {
   public static final String NAME = "CalSmartconfig";
 
-  Context context;
+  ReactApplicationContext context;
 
   public CalSmartconfigModule(ReactApplicationContext reactContext) {
     super(reactContext);
@@ -75,15 +78,29 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
         .enqueue(work);
 
     LiveData<WorkInfo> info = WorkManager.getInstance(context).getWorkInfoByIdLiveData(work.getId());
-    info.observe(context.getCurrentActivity(), new Observer<WorkInfo>() {
+    info.observe((AppCompatActivity) context.getCurrentActivity(), new Observer<WorkInfo>() {
       @Override
       public void onChanged(WorkInfo workInfo) {
         if (workInfo.getState() == WorkInfo.State.SUCCEEDED) {
           Data data = workInfo.getOutputData();
-          int count = data.getInt("count");
+          int count = data.getInt("count", 0);
           promise.resolve(count);
         }
       }
     });
+  }
+
+  public Activity getActivity(Context context) {
+    if (context == null) {
+      return null;
+    } else if (context instanceof ContextWrapper) {
+      if (context instanceof Activity) {
+        return (Activity) context;
+      } else {
+        return getActivity(((ContextWrapper) context).getBaseContext());
+      }
+    }
+
+    return null;
   }
 }

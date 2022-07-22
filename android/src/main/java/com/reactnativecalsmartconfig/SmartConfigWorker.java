@@ -57,7 +57,7 @@ public class SmartConfigWorker extends Worker {
     Logger log = Logger.getGlobal();
     log.info("Provisioning SmartConfig");
 
-    EsptouchTask task = new EsptouchTask(ssid, bssid, pass, this.context);
+    EsptouchTask task = new EsptouchTask(ssid, bssid, pass, this.getApplicationContext());
     // task.setEsptouchListener(new TouchListener(count, promise));
 
     List<IEsptouchResult> results;
