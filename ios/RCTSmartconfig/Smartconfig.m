@@ -7,6 +7,7 @@
 //
 
 #import "Smartconfig.h"
+#import <React/RCTLog.h>
 
 
 @interface EspTouchDelegateImpl : NSObject<ESPTouchDelegate>
