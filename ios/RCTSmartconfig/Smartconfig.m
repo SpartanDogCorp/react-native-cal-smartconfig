@@ -7,7 +7,6 @@
 //
 
 #import "Smartconfig.h"
-#import <React/RCTLog.h>
 
 
 @interface EspTouchDelegateImpl : NSObject<ESPTouchDelegate>
@@ -128,7 +127,7 @@ RCT_EXPORT_METHOD(start:(NSDictionary *)options
 
 - (void) cancel
 {
-    RCTLogInfo(@"Cancel last task before begin new task");
+    // RCTLogInfo(@"Cancel last task before begin new task");
     [self._condition lock];
     if (self._esptouchTask != nil)
     {
@@ -150,7 +149,7 @@ RCT_EXPORT_METHOD(start:(NSDictionary *)options
     int taskCount = [[self.options valueForKey:@"taskCount"] intValue];
     BOOL hidden = [self.options valueForKey:@"hidden"];
 
-    RCTLogInfo(@"ssid %@ pass %@ bssid %@ timeout %d", ssid, password, bssid,timeoutMillisecond);
+    // RCTLogInfo(@"ssid %@ pass %@ bssid %@ timeout %d", ssid, password, bssid,timeoutMillisecond);
     self._esptouchTask = [[ESPTouchTask alloc]initWithApSsid:ssid andApBssid:bssid andApPwd:password andIsSsidHiden:hidden andTimeoutMillisecond:timeoutMillisecond];
     // set delegate
     [self._esptouchTask setEsptouchDelegate:self._esptouchDelegate];
