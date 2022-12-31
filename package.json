@@ -2,4 +2,5 @@
   "name": "react-native-cal-smartconfig",
   "version": "1.0.0",
   "description": "smartconfig module for cal app"
+  "main": "src"
 }
