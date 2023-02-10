@@ -27,6 +27,13 @@ import com.facebook.react.module.annotations.ReactModule;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.Arguments;
 
+import com.google.common.util.concurrent.AsyncFunction;
+import com.google.common.util.concurrent.FutureCallback;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
+
 @ReactModule(name = CalSmartconfigModule.NAME)
 public class CalSmartconfigModule extends ReactContextBaseJavaModule {
   public static final String NAME = "CalSmartconfig";
@@ -73,6 +80,17 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void provision(String apSsid, String apBssid, String apPassword, Integer count, Promise promise) {
+    final ListeningExecutorService service = MoreExecutors.listeningDecorator(Executors.newFixedThreadPool(10));
+    // Using the future for the effect, the promise still returns the results
+    ListenableFuture<void> esptouch = service.submit(new Callable<void>() {
+      @Override
+      public void call() {
+        runProvision(apSsid, apBssid, apPassword, count, promise);
+      }
+    })
+  }
+
+  public static runProvision(String apSsid, String apBssid, String apPassword, Integer count, Promise promise){
     Logger log = Logger.getGlobal();
     log.info("Provisioning SmartConfig");
 
