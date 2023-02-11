@@ -56,5 +56,6 @@ repositories {
 dependencies {
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
+    implementation "com.google.guava:guava:31.0.1-android"
     implementation 'com.github.EspressifApp:lib-esptouch-android:1.0.0'
 }
