@@ -13,16 +13,17 @@ import android.net.wifi.WifiManager;
 import android.os.Build;
 
 import com.espressif.iot.esptouch.EsptouchTask;
+import com.espressif.iot.esptouch.IEsptouchResult;
+import com.espressif.iot.esptouch.IEsptouchListener;
 
 import java.util.ArrayList;
 import java.util.logging.Logger;
-
-import com.espreccif.iot.esptouch.IEsptouchListener;
 
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.module.annotations.ReactModule;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.Arguments;
@@ -94,24 +95,14 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
     Logger log = Logger.getGlobal();
     log.info("Provisioning SmartConfig");
 
-    ArrayList<E> results = new ArrayList<IEsptouchResult>();
-    private class TouchListener implements IEsptouchListener {
-      void onEsptouchResultAdded(IEsptouchResult result) {
-        results.add(result);
-        log.info(result);
+    EsptouchTask task = new EsptouchTask(apSsid, apBssid, apPassword, context);
+    task.setEsptouchListener(new TouchListener(count, promise));
 
-        if (count = 0) {
-          promise.resolve(results);
-        }
-
-        if (results.size() == count) {
-          promise.resolve(results);
-        }
-      }
+    try {
+      task.executeForResults(count);
+    } catch (RuntimeException e) {
+      log.severe(e.getMessage());
     }
 
-    EsptouchTask task = new EsptouchTask(apSsid, apBssid, apPassword, context);
-    task.setEsptouchListener(TouchListener);
-    task.executeForResults(count);
   }
 }
