@@ -88,7 +88,7 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
       public void call() {
         runProvision(apSsid, apBssid, apPassword, count, promise);
       }
-    })
+    });
   }
 
   public static void runProvision(String apSsid, String apBssid, String apPassword, Integer count, Promise promise){
