@@ -86,12 +86,12 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
     ListenableFuture<void> esptouch = service.submit(new Callable<void>() {
       @Override
       public void call() {
-        runProvision(apSsid, apBssid, apPassword, count, promise);
+        this.runProvision(apSsid, apBssid, apPassword, count, promise);
       }
     });
   }
 
-  public static void runProvision(String apSsid, String apBssid, String apPassword, Integer count, Promise promise){
+  public void runProvision(String apSsid, String apBssid, String apPassword, Integer count, Promise promise){
     Logger log = Logger.getGlobal();
     log.info("Provisioning SmartConfig");
 
