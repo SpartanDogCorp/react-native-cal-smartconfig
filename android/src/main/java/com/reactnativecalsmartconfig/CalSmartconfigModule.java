@@ -91,7 +91,7 @@ public class CalSmartconfigModule extends ReactContextBaseJavaModule {
     })
   }
 
-  public static runProvision(String apSsid, String apBssid, String apPassword, Integer count, Promise promise){
+  public static void runProvision(String apSsid, String apBssid, String apPassword, Integer count, Promise promise){
     Logger log = Logger.getGlobal();
     log.info("Provisioning SmartConfig");
 
