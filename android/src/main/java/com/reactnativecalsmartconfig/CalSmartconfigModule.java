@@ -17,6 +17,8 @@ import com.espressif.iot.esptouch.IEsptouchResult;
 import com.espressif.iot.esptouch.IEsptouchListener;
 
 import java.util.ArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Callable;
 import java.util.logging.Logger;
 
 import com.facebook.react.bridge.Promise;
@@ -29,8 +31,6 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.Arguments;
 
 import com.google.common.util.concurrent.AsyncFunction;
-import com.google.common.util.concurrent.Callable;
-import com.google.common.util.concurrent.Executors;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
